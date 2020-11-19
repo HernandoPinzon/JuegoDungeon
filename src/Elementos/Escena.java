@@ -22,8 +22,8 @@ public class Escena extends Sprite{
     public Escena(int x, int y,int ancho, int alto,int playerX, int playerY) {
         super(x, y);
         player =new Player(playerX,playerY);
-        paredes = new ArrayList<Pared>();
-        enemigos = new ArrayList<Enemy>();
+        paredes = new ArrayList();
+        enemigos = new ArrayList();
         setAlto(alto);
         setAncho(ancho);
         setColor(Color.GREEN);
