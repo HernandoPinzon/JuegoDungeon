@@ -41,18 +41,18 @@ public class Player extends Sprite{
         
     }
     
-    public void moverse(java.awt.event.KeyEvent evt,int[] coliccion){
+    public void moverse(java.awt.event.KeyEvent evt,int[] collicion){
         
-        if (evt.getKeyCode()== KeyEvent.VK_UP&&(coliccion[0]!=Sprite.COLLICION_YES)){
+        if (evt.getKeyCode()== KeyEvent.VK_UP&&(collicion[0]==Sprite.COLLICION_NOT)){
             y-=velocidad;
             
-        } else if (evt.getKeyCode()== KeyEvent.VK_DOWN&&(coliccion[1]!=Sprite.COLLICION_YES)){
+        } else if (evt.getKeyCode()== KeyEvent.VK_DOWN&&(collicion[1]==Sprite.COLLICION_NOT)){
             y+=velocidad;
             
-        } else if (evt.getKeyCode()== KeyEvent.VK_LEFT&&(coliccion[2]!=Sprite.COLLICION_YES)){
+        } else if (evt.getKeyCode()== KeyEvent.VK_LEFT&&(collicion[2]==Sprite.COLLICION_NOT)){
             x-=velocidad;
             
-        } else if (evt.getKeyCode()== KeyEvent.VK_RIGHT&&(coliccion[3]!=Sprite.COLLICION_YES)){
+        } else if (evt.getKeyCode()== KeyEvent.VK_RIGHT&&(collicion[3]==Sprite.COLLICION_NOT)){
             x+=velocidad;
         }
         

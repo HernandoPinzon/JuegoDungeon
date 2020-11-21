@@ -9,6 +9,7 @@ import Elementos.Contenedor;
 import Elementos.GameController;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JFrame;
 
 /**
  *
@@ -73,6 +74,9 @@ public class VistaPrincipal extends javax.swing.JFrame
         int tamPantallaX= 800;
         int tamPantallaY= 400;
         VistaPrincipal vista = new VistaPrincipal();
+        vista.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        vista.setResizable(false);
+        vista.setLocationRelativeTo(null);
         vista.setSize(tamPantallaX,tamPantallaY);
         GameController gameController = new GameController(tamPantallaX,tamPantallaY);
         gameController.setContenedor(vista);
