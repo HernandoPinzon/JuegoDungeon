@@ -30,8 +30,8 @@ public class Player extends Sprite{
      */
     @Override
     public void dibujar(Graphics g) {
-        g.setColor(color);
-        g.fillRect(getX(), getY(), getAncho(), getAlto());
+        //g.setColor(color);
+        //g.fillRect(getX(), getY(), getAncho(), getAlto());
         g.setColor(Color.PINK);
         g.fillRect(getX()+10, getY()-10, getAncho()-20, getAlto()-10);
         g.fillRect(getX()-5, getY()-10, 40, 5);
