@@ -18,7 +18,6 @@ public class Escena extends Sprite{
     ArrayList<Pared> paredes;
     ArrayList<Enemy> enemigos;
     Player player;
-    int[] inCollicions={0,0,0,0};
 
     public Escena(int x, int y,int ancho, int alto,int playerX, int playerY) {
         super(x, y);
@@ -38,9 +37,8 @@ public class Escena extends Sprite{
                 || evt.getKeyCode() == KeyEvent.VK_DOWN
                 || evt.getKeyCode() == KeyEvent.VK_LEFT
                 || evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-            player.moverse(evt,inCollicions);
+            player.moverse(evt,inCollicions());
         }
-        inCollicions=player.isCollicionWith(paredes.get(0));
     }
     
     public int[] inCollicions(){
@@ -55,9 +53,14 @@ public class Escena extends Sprite{
         //hallar el vector de coliciones resultante
         for (int[] collicion : collicions) {
             for (int i = 0; i < 4; i++) {
-                resultado[i]+=collicion[1];
+                resultado[i]+=collicion[i];
             }
         }
+        
+        for (int i = 0; i < resultado.length; i++) {
+            System.out.print(resultado[i]);
+        }
+        System.out.println("");
         return resultado;
     }
 
