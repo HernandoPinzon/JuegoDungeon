@@ -54,8 +54,9 @@ public class Player extends Sprite{
             
         } else if (evt.getKeyCode()== KeyEvent.VK_RIGHT&&(coliccion[3]!=Sprite.COLLICION_YES)){
             x+=velocidad;
-            
         }
+        
+        
         
         if(getX()>800) System.exit(0);
         this.contenedor.refrescar();

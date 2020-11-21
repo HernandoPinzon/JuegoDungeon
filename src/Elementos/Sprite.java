@@ -40,22 +40,35 @@ public abstract class Sprite
         int[] collicion={0,0,0,0};
         //System.out.println(x2 + " " + y2 + " " + alto2 + " " + ancho2+"\n"+x + " " + y + " " + ancho + " " + alto);
         if ((x + ancho > x2 && (x < x2 + ancho2)) && (y + alto > y2 && (y < y2 + alto2))) {
-            if (y < y2 + alto2&&(y > y2)) {
-                System.out.println("arriba");
+            
+            
+            if ((y < y2 + alto2&&(y > y2+(alto2-alto/2)))&&!(y + alto > y2&&(y + alto<y2+ancho/2))) {
+                System.out.print("arriba ");
                 collicion[0]=1;
             }
-            if (y + alto > y2&&(y + alto<y2+alto2)) {
-                System.out.println("abajo: "+(y + alto)+" > "+y2+" && "+(y + alto)+" < "+(y2+alto2));
+            if ((y + alto > y2&&(y + alto<y2+ancho/2))&&!(y < y2 + alto2&&(y > y2+(alto2-alto/2)))) {
+                System.out.print("abajo ");
                 collicion[1]=1;
             }
-            if (x < x2 + ancho2&&(x>x2)) {
-                System.out.println("izquierda: "+(x2 + ancho2)+" > "+x);
+            if ((x < x2 + ancho2&&(x>x2+(ancho2-ancho/2)))&&!(x + ancho > x2&&(x + ancho < x2+ancho/2))) {
+                System.out.print("izquierda ");
                 collicion[2]=1;
             }
-            if (x + ancho > x2&&(x + ancho < x2+ancho2)) {
+            if ((x + ancho > x2&&(x + ancho < x2+ancho/2))&&!(x < x2 + ancho2&&(x>x2+(ancho2-ancho/2)))) {
                 
-                System.out.println("derecha: ");
+                System.out.print("derecha ");
                 collicion[3]=1;
+            }
+            System.out.println("");
+            for (int i = 0; i < 2; i++) {
+                if((collicion[i]==COLLICION_YES)&&collicion[2]==COLLICION_YES&&collicion[3]==COLLICION_NOT){
+                    collicion[i]=COLLICION_NOT;
+                    collicion[2]=COLLICION_NOT;
+                }
+                if((collicion[i]==COLLICION_YES)&&collicion[3]==COLLICION_YES&&collicion[2]==COLLICION_NOT){
+                    collicion[i]=COLLICION_NOT;
+                    collicion[3]=COLLICION_NOT;
+                }
             }
         }
         return collicion;
