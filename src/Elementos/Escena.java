@@ -42,6 +42,24 @@ public class Escena extends Sprite{
         }
         inCollicions=player.isCollicionWith(paredes.get(0));
     }
+    
+    public int[] inCollicions(){
+        ArrayList<int[]> collicions = new ArrayList<>();
+        int[] resultado={0,0,0,0};
+        
+        //revisamos si coliciona con alguna pared
+        for (Pared p : paredes) {
+            collicions.add(player.isCollicionWith(p));
+        }
+        
+        //hallar el vector de coliciones resultante
+        for (int[] collicion : collicions) {
+            for (int i = 0; i < 4; i++) {
+                resultado[i]+=collicion[1];
+            }
+        }
+        return resultado;
+    }
 
     @Override
     public void dibujar(Graphics g) {
