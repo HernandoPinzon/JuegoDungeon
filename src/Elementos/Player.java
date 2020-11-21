@@ -15,11 +15,13 @@ import java.awt.event.KeyEvent;
  */
 public class Player extends Sprite{
 
+    int velocidad=10;
     public Player(int x, int y) {
         super(x, y);
         this.setColor(Color.blue);
         this.setAlto(50);
         this.setAncho(30);
+        
     }
 
     /**
@@ -29,25 +31,25 @@ public class Player extends Sprite{
     @Override
     public void dibujar(Graphics g) {
         g.setColor(color);
-        g.fillRect(x,y,ancho,alto);
+        g.fillRect(getX(), getY(), getAncho(), getAlto());
     }
     
     public void moverse(java.awt.event.KeyEvent evt){
         if (evt.getKeyCode()== KeyEvent.VK_UP){
-            y-=10;
+            y-=velocidad;
             
         } else if (evt.getKeyCode()== KeyEvent.VK_DOWN){
-            y+=10;
+            y+=velocidad;
             
         } else if (evt.getKeyCode()== KeyEvent.VK_LEFT){
-            x-=10;
+            x-=velocidad;
             
         } else if (evt.getKeyCode()== KeyEvent.VK_RIGHT){
-            x+=10;
+            x+=velocidad;
             
         }
         
-        if(x>800) System.exit(0);
+        if(getX()>800) System.exit(0);
         this.contenedor.refrescar();
     }
     

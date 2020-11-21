@@ -42,8 +42,8 @@ public class Enemy extends SpriteMovil{
     @Override
     public void dibujar(Graphics g) {
         g.setColor(color);
-        g.fillRect(x,y,ancho,alto);
-        System.out.println(name+": "+"X:"+x+" Y:"+y);
+        g.fillRect(getX(), getY(), getAncho(), getAlto());
+        System.out.println(name+": "+"X:"+getX()+" Y:"+getY());
     }
 
     public String getName() {
@@ -59,8 +59,8 @@ public class Enemy extends SpriteMovil{
         while(true){
             int a=0;
             for (int[] r : arRuta) {
-                int dx=x;
-                int dy=y;
+                int dx=getX();
+                int dy=getY();
                 
                 //System.out.println("Posicion:"+x+", "+y);
                 double[] velocidades= ruta.hallarVelocidadesRelativas(r[0],r[1],speed);
