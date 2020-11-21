@@ -18,7 +18,7 @@ public class Escena extends Sprite{
     ArrayList<Pared> paredes;
     ArrayList<Enemy> enemigos;
     Player player;
-    short inCollicion= 0;
+    int[] inCollicions={0,0,0,0};
 
     public Escena(int x, int y,int ancho, int alto,int playerX, int playerY) {
         super(x, y);
@@ -29,34 +29,32 @@ public class Escena extends Sprite{
         setAncho(ancho);
         setColor(Color.GREEN);
         player.setContenedor(this);
+        
     }
 
     public void handleKeyPressed(java.awt.event.KeyEvent evt) {
-        short collicionType = 0;
         
         if (evt.getKeyCode() == KeyEvent.VK_UP
                 || evt.getKeyCode() == KeyEvent.VK_DOWN
                 || evt.getKeyCode() == KeyEvent.VK_LEFT
                 || evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-            player.moverse(evt);
+            player.moverse(evt,inCollicions);
         }
-        collicionType=player.isCollicionWith(paredes.get(0));
-        if (collicionType != 0) {
-            System.out.println("aaaa");
-        }
+        inCollicions=player.isCollicionWith(paredes.get(0));
     }
 
     @Override
     public void dibujar(Graphics g) {
         g.setColor(color);
         g.fillRect(getX(), getY(), getAncho(), getAlto());
-        player.dibujar(g);
+        
         for (Pared p : paredes) {
             p.dibujar(g);
         }
         for (Enemy e : enemigos) {
             e.dibujar(g);
         }
+        player.dibujar(g);
     }
     
     public void agregarPared(int x, int y, int alto, int ancho){

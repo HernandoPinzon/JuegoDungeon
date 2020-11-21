@@ -12,9 +12,9 @@ import java.awt.Graphics;
  *
  * @author hernando
  */
-public abstract class Sprite 
-    implements Contenedor
-{
+public abstract class Sprite
+        implements Contenedor {
+
     int x;
     int y;
     protected Color color;
@@ -22,35 +22,43 @@ public abstract class Sprite
     private int ancho;
     protected Contenedor contenedor;
     public final static short COLLICION_NOT = 0;
-    public final static short COLLICION_ARRIBA = 1;
-    public final static short COLLICION_ABAJO = 2;
-    public final static short COLLICION_IZQUIERDA = 3;
-    public final static short COLLICION_DERECHA = 4;
-    public final static short COLLICION_DEFAULT = 5;
-
+    public final static short COLLICION_YES = 1;
     
+
     public Sprite(int x, int y) {
         this.setX(x);
         this.setY(y);
     }
-    
+
     public abstract void dibujar(Graphics g);
-    
-    public short isCollicionWith(Sprite sprite) {
+
+    public int[] isCollicionWith(Sprite sprite) {
         int x2 = sprite.getX();
         int y2 = sprite.getY();
         int alto2 = sprite.getAlto();
         int ancho2 = sprite.getAncho();
-        System.out.println(x2 + " " + y2 + " " + alto2 + " " + ancho2+"\n"+x + " " + y + " " + ancho + " " + alto);
-        if ((x + ancho > x2 && (x < x2 + ancho2))&&(y + alto > y2 && (y < y2 + alto2))) {
-            return COLLICION_DEFAULT;
+        int[] collicion={0,0,0,0};
+        //System.out.println(x2 + " " + y2 + " " + alto2 + " " + ancho2+"\n"+x + " " + y + " " + ancho + " " + alto);
+        if ((x + ancho > x2 && (x < x2 + ancho2)) && (y + alto > y2 && (y < y2 + alto2))) {
+            if (y < y2 + alto2&&(y > y2)) {
+                System.out.println("arriba");
+                collicion[0]=1;
+            }
+            if (y + alto > y2&&(y + alto<y2+alto2)) {
+                System.out.println("abajo: "+(y + alto)+" > "+y2+" && "+(y + alto)+" < "+(y2+alto2));
+                collicion[1]=1;
+            }
+            if (x < x2 + ancho2&&(x>x2)) {
+                System.out.println("izquierda: "+(x2 + ancho2)+" > "+x);
+                collicion[2]=1;
+            }
+            if (x + ancho > x2&&(x + ancho < x2+ancho2)) {
+                
+                System.out.println("derecha: ");
+                collicion[3]=1;
+            }
         }
-        /*else if (x2 == x + ancho) {
-            System.out.println("2");
-        } else if (y2 == y + alto) {
-            System.out.println("2");
-        }*/
-        return 0;
+        return collicion;
     }
 
     @Override
@@ -109,6 +117,5 @@ public abstract class Sprite
     public int getAncho() {
         return ancho;
     }
-    
-    
+
 }
