@@ -39,16 +39,32 @@ public class Escena
                 || evt.getKeyCode() == KeyEvent.VK_DOWN
                 || evt.getKeyCode() == KeyEvent.VK_LEFT
                 || evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-            player.moverse(evt, inCollicions());
+            player.moverse(evt, inCollicionsPared(paredes));
         }
     }
+    
+    public int[] inCollicionsPared(ArrayList<Pared> paredes){
+        ArrayList<Sprite> sprites=new ArrayList<Sprite>();
+        for (Pared pared : paredes) {
+            sprites.add((Sprite)pared);
+        }
+        return inCollicions(sprites);
+    }
+    
+    public int[] inCollicionsEnemys(ArrayList<Enemy> enemigos){
+        ArrayList<Sprite> sprites=new ArrayList<Sprite>();
+        for (Enemy enemy : enemigos) {
+            sprites.add((Sprite)enemy);
+        }
+        return inCollicions(sprites);
+    }
 
-    public int[] inCollicions() {
+    public int[] inCollicions(ArrayList<Sprite> sprites) {
         ArrayList<int[]> collicions = new ArrayList<>();
         int[] resultado = {0, 0, 0, 0};
 
         //revisamos si coliciona con alguna pared
-        for (Pared p : paredes) {
+        for (Sprite p : sprites) {
             collicions.add(player.isCollicionWith(p));
         }
 
@@ -74,6 +90,11 @@ public class Escena
         for (Pared p : paredes) {
             p.dibujar(g);
         }
+        
+        if(isCollicionBool(inCollicionsEnemys(enemigos), true)){
+            System.exit(0);
+        }
+        
         for (Enemy e : enemigos) {
             e.dibujar(g);
         }
@@ -108,6 +129,10 @@ public class Escena
     public void agregarEnemy(Enemy newEnemy) {
         newEnemy.setContenedor(this);
         enemigos.add(newEnemy);
+    }
+    
+    public void chocarEnemigo(){
+        
     }
 
 }

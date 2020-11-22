@@ -30,14 +30,18 @@ public class Player extends Sprite{
      */
     @Override
     public void dibujar(Graphics g) {
+        //colorear la sombra
         //g.setColor(color);
         //g.fillRect(getX(), getY(), getAncho(), getAlto());
+        
+        //colorear el player de prueba
         g.setColor(Color.PINK);
-        g.fillRect(getX()+10, getY()-10, getAncho()-20, getAlto()-10);
         g.fillRect(getX()-5, getY()-10, 40, 5);
         g.fillRect(getX()+10, getY()-10, 4, 30);
         g.fillRect(getX()+17, getY()-10, 4, 30);
         g.fillRect(getX()+10, getY()-22, 10, 10);
+        g.setColor(Color.GRAY);
+        g.fillRect(getX()+10, getY()-10, getAncho()-20, getAlto()-10);
         
     }
     

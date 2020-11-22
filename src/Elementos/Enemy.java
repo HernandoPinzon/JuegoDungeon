@@ -15,9 +15,10 @@ import java.util.logging.Logger;
  *
  * @author hernando
  */
-public class Enemy extends SpriteMovil{
+public class Enemy extends SpriteMovil {
 
     String name;
+
     public Enemy(int x, int y) {
         super(x, y);
         setAncho(40);
@@ -26,7 +27,7 @@ public class Enemy extends SpriteMovil{
         iniciarHilo();
     }
 
-    public Enemy(int x, int y, Ruta ruta,String name) {
+    public Enemy(int x, int y, Ruta ruta, String name) {
         super(x, y, ruta);
         setAncho(40);
         setAlto(40);
@@ -34,8 +35,8 @@ public class Enemy extends SpriteMovil{
         this.name = name;
         iniciarHilo();
     }
-    
-    public void iniciarHilo(){
+
+    public void iniciarHilo() {
         hilo = new Thread(this);
         hilo.start();
     }
@@ -49,29 +50,26 @@ public class Enemy extends SpriteMovil{
     public String getName() {
         return name;
     }
-    
+
     @Override
     public void run() {
         ArrayList<int[]> arRuta = getRuta().getMovimientos();
         int speed = getRuta().speed;
-
         while (true) {
             int a = 0;
             for (int[] r : arRuta) {
                 int dx = getX();
                 int dy = getY();
 
-                
                 double[] velocidades = getRuta().hallarVelocidadesRelativas(r[0], r[1], speed);
                 a++;
                 while (velocidades[2] > 1) {
                     x += Math.round(velocidades[0]);
                     y += Math.round(velocidades[1]);
-                    
-                    velocidades[2] -= 1;
-                    
-                    try {
 
+                    velocidades[2] -= 1;
+
+                    try {
                         Thread.sleep(250);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,6 +82,12 @@ public class Enemy extends SpriteMovil{
             }
 
         }
+    }
+    
+    public boolean isCollicionWithPlayer(){
+        
+        
+        return false;
     }
 
 }
