@@ -12,8 +12,8 @@ import java.awt.Color;
  * @author hernando
  */
 public abstract class SpriteMovil 
-    extends Sprite
-
+        extends Sprite
+        implements Runnable
 {
     private Ruta ruta;
     protected Thread hilo;
@@ -36,6 +36,14 @@ public abstract class SpriteMovil
     public Ruta getRuta() {
         return ruta;
     }
+
+    /**
+     * @param hilo the hilo to set
+     */
+    public void setHilo(Thread hilo) {
+        this.hilo = hilo;
+    }
+    
     
     
     

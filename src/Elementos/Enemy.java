@@ -23,7 +23,7 @@ public class Enemy extends SpriteMovil{
         setAncho(40);
         setAlto(40);
         setColor(Color.red);
-        hilo.start();
+        iniciarHilo();
     }
 
     public Enemy(int x, int y, Ruta ruta,String name) {
@@ -32,24 +32,26 @@ public class Enemy extends SpriteMovil{
         setAlto(40);
         setColor(Color.red);
         this.name = name;
-        hilo.start();
+        iniciarHilo();
     }
     
-    
+    public void iniciarHilo(){
+        hilo = new Thread(this);
+        hilo.start();
+    }
 
     @Override
     public void dibujar(Graphics g) {
         g.setColor(color);
         g.fillRect(getX(), getY(), getAncho(), getAlto());
-        System.out.println(name+": "+"X:"+getX()+" Y:"+getY());
     }
 
     public String getName() {
         return name;
     }
     
-
-    public void mover() {
+    @Override
+    public void run() {
         ArrayList<int[]> arRuta = getRuta().getMovimientos();
         int speed = getRuta().speed;
 
@@ -59,16 +61,15 @@ public class Enemy extends SpriteMovil{
                 int dx = getX();
                 int dy = getY();
 
-                //System.out.println("Posicion:"+x+", "+y);
+                
                 double[] velocidades = getRuta().hallarVelocidadesRelativas(r[0], r[1], speed);
-                System.out.println(name + ": " + "El vector velocidades: " + velocidades[0] + " " + velocidades[1] + " " + velocidades[2] + " ");
                 a++;
                 while (velocidades[2] > 1) {
                     x += Math.round(velocidades[0]);
                     y += Math.round(velocidades[1]);
-                    //System.out.println(x+" "+y+" "+velocidades[2]);
+                    
                     velocidades[2] -= 1;
-                    //System.out.println(velocidades[2]);
+                    
                     try {
 
                         Thread.sleep(250);

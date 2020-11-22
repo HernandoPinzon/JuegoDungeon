@@ -15,12 +15,11 @@ import java.util.ArrayList;
  * @author hernando
  */
 public class Escena
-        extends Sprite implements Runnable {
+        extends Sprite{
 
     ArrayList<Pared> paredes;
     ArrayList<Enemy> enemigos;
     Player player;
-    Thread hiloEnemys;
 
     public Escena(int x, int y, int ancho, int alto, int playerX, int playerY) {
         super(x, y);
@@ -109,15 +108,6 @@ public class Escena
     public void agregarEnemy(Enemy newEnemy) {
         newEnemy.setContenedor(this);
         enemigos.add(newEnemy);
-    }
-    
-    public void moverEnemys(Enemy enemy){
-        
-    }
-
-    @Override
-    public void run() {
-        
     }
 
 }

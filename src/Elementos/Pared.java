@@ -27,7 +27,7 @@ public class Pared extends Sprite{
     @Override
     public void dibujar(Graphics g) {
         g.setColor(color);
-        g.drawRect(getX(), getY(), getAncho(), getAlto());
+        g.fillRect(getX(), getY(), getAncho(), getAlto());
         
     }
     
