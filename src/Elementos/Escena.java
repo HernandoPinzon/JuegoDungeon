@@ -110,10 +110,14 @@ public class Escena
         newEnemy.setContenedor(this);
         enemigos.add(newEnemy);
     }
+    
+    public void moverEnemys(Enemy enemy){
+        
+    }
 
     @Override
     public void run() {
-
+        
     }
 
 }
