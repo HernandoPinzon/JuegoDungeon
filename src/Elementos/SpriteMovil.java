@@ -13,7 +13,6 @@ import java.awt.Color;
  */
 public abstract class SpriteMovil 
     extends Sprite
-    implements Runnable
 
 {
     protected Ruta ruta;

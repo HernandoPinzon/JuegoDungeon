@@ -23,7 +23,6 @@ public class Enemy extends SpriteMovil{
         setAncho(40);
         setAlto(40);
         setColor(Color.red);
-        hilo = new Thread(this);
         hilo.start();
     }
 
@@ -33,7 +32,6 @@ public class Enemy extends SpriteMovil{
         setAlto(40);
         setColor(Color.red);
         this.name = name;
-        hilo = new Thread(this);
         hilo.start();
     }
     
@@ -51,29 +49,27 @@ public class Enemy extends SpriteMovil{
     }
     
 
-    @Override
-    public void run() {
+    public void mover() {
         ArrayList<int[]> arRuta = ruta.getMovimientos();
         int speed = ruta.speed;
-        
-        while(true){
-            int a=0;
+
+        while (true) {
+            int a = 0;
             for (int[] r : arRuta) {
-                int dx=getX();
-                int dy=getY();
-                
+                int dx = getX();
+                int dy = getY();
+
                 //System.out.println("Posicion:"+x+", "+y);
-                double[] velocidades= ruta.hallarVelocidadesRelativas(r[0],r[1],speed);
-                System.out.println(name+": "+"El vector velocidades: "+velocidades[0]+" "+velocidades[1]+" "+velocidades[2]+" ");
+                double[] velocidades = ruta.hallarVelocidadesRelativas(r[0], r[1], speed);
+                System.out.println(name + ": " + "El vector velocidades: " + velocidades[0] + " " + velocidades[1] + " " + velocidades[2] + " ");
                 a++;
-                while(velocidades[2]>1){
-                    x+=Math.round(velocidades[0]);
-                    y+=Math.round(velocidades[1]);
+                while (velocidades[2] > 1) {
+                    x += Math.round(velocidades[0]);
+                    y += Math.round(velocidades[1]);
                     //System.out.println(x+" "+y+" "+velocidades[2]);
-                    velocidades[2]-=1;
+                    velocidades[2] -= 1;
                     //System.out.println(velocidades[2]);
                     try {
-                        
 
                         Thread.sleep(250);
                     } catch (InterruptedException ex) {
@@ -81,13 +77,12 @@ public class Enemy extends SpriteMovil{
                     }
                     this.contenedor.refrescar();
                 }
-                x=dx+r[0];
-                y=dy+r[1];
-                
+                x = dx + r[0];
+                y = dy + r[1];
+
             }
-            
-            
+
         }
     }
-    
+
 }
