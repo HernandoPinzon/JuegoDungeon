@@ -50,8 +50,8 @@ public class Enemy extends SpriteMovil{
     
 
     public void mover() {
-        ArrayList<int[]> arRuta = ruta.getMovimientos();
-        int speed = ruta.speed;
+        ArrayList<int[]> arRuta = getRuta().getMovimientos();
+        int speed = getRuta().speed;
 
         while (true) {
             int a = 0;
@@ -60,7 +60,7 @@ public class Enemy extends SpriteMovil{
                 int dy = getY();
 
                 //System.out.println("Posicion:"+x+", "+y);
-                double[] velocidades = ruta.hallarVelocidadesRelativas(r[0], r[1], speed);
+                double[] velocidades = getRuta().hallarVelocidadesRelativas(r[0], r[1], speed);
                 System.out.println(name + ": " + "El vector velocidades: " + velocidades[0] + " " + velocidades[1] + " " + velocidades[2] + " ");
                 a++;
                 while (velocidades[2] > 1) {

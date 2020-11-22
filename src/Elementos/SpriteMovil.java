@@ -15,7 +15,7 @@ public abstract class SpriteMovil
     extends Sprite
 
 {
-    protected Ruta ruta;
+    private Ruta ruta;
     protected Thread hilo;
     public SpriteMovil(int x, int y) {
         super(x, y);
@@ -28,6 +28,13 @@ public abstract class SpriteMovil
 
     public void setRuta(Ruta ruta) {
         this.ruta = ruta;
+    }
+
+    /**
+     * @return the ruta
+     */
+    public Ruta getRuta() {
+        return ruta;
     }
     
     
