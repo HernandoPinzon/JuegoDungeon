@@ -29,12 +29,15 @@ public class Enemy extends SpriteMovil {
         setAlto(40);
         setColor(Color.red);
         this.setName(name);
+        setImagePath("images/monster.png");
+        cargarImagen();
     }
 
     @Override
     public void dibujar(Graphics g) {
-        g.setColor(color);
-        g.fillRect(getX(), getY(), getAncho(), getAlto());
+        //g.setColor(color);
+        //g.fillRect(getX(), getY(), getAncho(), getAlto());
+        g.drawImage(img, x, y-5, getAlto(), getAncho(), null);
     }
 
     @Override

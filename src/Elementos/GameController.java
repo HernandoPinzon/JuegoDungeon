@@ -48,6 +48,9 @@ public class GameController implements Contenedor {
         escenas.get(escenaNum).agregarPared(20, 380, 20, 780);
         escenas.get(escenaNum).agregarPared(70, 30, 300, 20);
         escenas.get(escenaNum).agregarPared(90, 310, 20, 500);
+        escenas.get(escenaNum).agregarPared(650, 70, 310, 20);
+        escenas.get(escenaNum).agregarPared(590, 120, 210, 20);
+        escenas.get(escenaNum).agregarPared(130, 70, 20, 520);
         contenedor.refrescar();
     }
 

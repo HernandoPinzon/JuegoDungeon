@@ -8,20 +8,27 @@ package Elementos;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author hernando
  */
 public class Player extends Sprite{
-
+    
     int velocidad=10;
     public Player(int x, int y,Contenedor contenedor) {
         super(x, y, contenedor);
         this.setColor(Color.GRAY);
         this.setAlto(30);
         this.setAncho(30);
+        setImagePath("images/deku.png");
+        cargarImagen();
     }
+    
+    
 
     /**
      *
@@ -32,15 +39,7 @@ public class Player extends Sprite{
         //colorear la sombra
         //g.setColor(color);
         //g.fillRect(getX(), getY(), getAncho(), getAlto());
-        
-        //colorear el player de prueba
-        g.setColor(Color.PINK);
-        g.fillRect(getX()-5, getY()-10, 40, 5);
-        g.fillRect(getX()+10, getY()-10, 4, 30);
-        g.fillRect(getX()+16, getY()-10, 4, 30);
-        g.fillRect(getX()+10, getY()-22, 10, 10);
-        g.setColor(Color.GRAY);
-        g.fillRect(getX()+10, getY()-10, getAncho()-20, getAlto()-10);
+        g.drawImage(img, x+5, y-20,17,40, null);
     }
     
     public void moverse(java.awt.event.KeyEvent evt,int[] collicion){

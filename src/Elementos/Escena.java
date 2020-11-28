@@ -7,7 +7,9 @@ package Elementos;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,7 @@ public class Escena
     ArrayList<Pared> paredes;
     ArrayList<Enemy> enemigos;
     Player player;
+    
 
     public Escena(int x, int y, int ancho, int alto, int playerX, int playerY) {
         super(x, y);
@@ -28,8 +31,27 @@ public class Escena
         enemigos = new ArrayList();
         setAlto(alto);
         setAncho(ancho);
-        setColor(Color.GREEN);
+        setColor(Color.GRAY);
         player.setContenedor(this);
+        setImagePath("images/piedra.jpg");
+        cargarImagen();
+        crearImg();
+    }
+
+        public void crearImg(){
+        image = new BufferedImage(getAncho(), getAncho(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+        
+        int widthIMG =img.getWidth(null);
+        int heightIMG = img.getHeight(null);
+        System.out.println(widthIMG+" "+heightIMG);
+        for (int i = 0; i < getAncho(); i+=widthIMG/10) {
+            for (int j = 0; j < getAlto(); j+=heightIMG/10) {
+                g2d.drawImage(img, i, j, widthIMG/10, heightIMG/10, null);
+                System.out.println(widthIMG+" "+heightIMG);
+            }
+        }
+        g2d.dispose();
     }
 
     public void iniciarHilosEnemys(){
@@ -88,9 +110,10 @@ public class Escena
 
     @Override
     public void dibujar(Graphics g) {
-        g.setColor(color);
-        g.fillRect(getX(), getY(), getAncho(), getAlto());
-
+        //g.setColor(color);
+        //g.fillRect(getX(), getY(), getAncho(), getAlto());
+        g.drawImage(image, 0, 0, null);
+        
         for (Pared p : paredes) {
             p.dibujar(g);
         }

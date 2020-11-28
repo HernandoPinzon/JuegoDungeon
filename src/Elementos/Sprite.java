@@ -7,6 +7,11 @@ package Elementos;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -24,10 +29,22 @@ public abstract class Sprite
     protected Contenedor contenedor;
     public final static short COLLICION_NOT = 0;
     public final static short COLLICION_YES = 1;
+    Image img;
+    private String imagePath;
+    BufferedImage image;
 
     public Sprite(int x, int y) {
         this.setX(x);
         this.setY(y);
+    }
+    
+    public void cargarImagen(){
+        File file = new File(getImagePath());
+        try {
+            img = ImageIO.read(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Sprite(int x, int y, Contenedor contenedor, Runnable target) {
@@ -151,6 +168,20 @@ public abstract class Sprite
      */
     public int getAncho() {
         return ancho;
+    }
+
+    /**
+     * @param imagePath the imagePath to set
+     */
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    /**
+     * @return the imagePath
+     */
+    public String getImagePath() {
+        return imagePath;
     }
 
 }
