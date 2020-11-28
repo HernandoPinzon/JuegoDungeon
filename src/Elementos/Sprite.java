@@ -7,6 +7,7 @@ package Elementos;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -36,6 +37,20 @@ public abstract class Sprite
     public Sprite(int x, int y) {
         this.setX(x);
         this.setY(y);
+    }
+    
+        public void crearTextura() {
+        image = new BufferedImage(getAncho(), getAlto(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+
+        int widthIMG = img.getWidth(null);
+        int heightIMG = img.getHeight(null);
+        for (int i = 0; i < getAncho(); i += widthIMG / 10) {
+            for (int j = 0; j < getAlto(); j += heightIMG / 10) {
+                g2d.drawImage(img, i, j, widthIMG / 10, heightIMG / 10, null);
+            }
+        }
+        g2d.dispose();
     }
     
     public void cargarImagen(){
