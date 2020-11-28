@@ -15,7 +15,7 @@ import java.awt.Graphics;
 public class Pared extends Sprite{
 
     public Pared(int x, int y, int alto, int ancho, Contenedor contenedor) {
-        super(x, y, contenedor);
+        super(x, y, contenedor,5);
         this.setColor(Color.blue);
         this.setAlto(alto);
         this.setAncho(ancho);

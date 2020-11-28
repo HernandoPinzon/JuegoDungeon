@@ -25,7 +25,7 @@ public class Escena
     
 
     public Escena(int x, int y, int ancho, int alto, int playerX, int playerY) {
-        super(x, y);
+        super(x, y,10);
         player = new Player(playerX, playerY, this);
         paredes = new ArrayList();
         enemigos = new ArrayList();
@@ -36,6 +36,16 @@ public class Escena
         setImagePath("images/piedra.jpg");
         cargarImagen();
         crearTextura();
+    }
+    
+    public void dibujarFondo(){
+        //image = new BufferedImage(getAncho(), getAlto(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+        
+        for (Pared p : paredes) {
+            g2d.drawImage(p.image, p.x, p.y, null);
+        }
+        g2d.dispose();
     }
     
     public void iniciarHilosEnemys(){
@@ -98,9 +108,9 @@ public class Escena
         //g.fillRect(getX(), getY(), getAncho(), getAlto());
         g.drawImage(image, x, y, null);
         
-        for (Pared p : paredes) {
+        /*for (Pared p : paredes) {
             p.dibujar(g);
-        }
+        }*/
         
         if(isCollicionBool(inCollicionsEnemys(enemigos), true)){
             System.exit(0);
@@ -116,6 +126,7 @@ public class Escena
         Pared paredNueva = new Pared(x, y, alto, ancho, this);
         paredNueva.setContenedor(this);
         paredes.add(paredNueva);
+        dibujarFondo();
     }
 
     public void agregarPared(Pared paredNueva) {

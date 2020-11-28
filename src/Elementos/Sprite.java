@@ -33,34 +33,14 @@ public abstract class Sprite
     Image img;
     private String imagePath;
     BufferedImage image;
+    int escalaTextura;
 
-    public Sprite(int x, int y) {
+    public Sprite(int x, int y, int escalaTextura) {
         this.setX(x);
         this.setY(y);
+        this.escalaTextura= escalaTextura;
     }
     
-        public void crearTextura() {
-        image = new BufferedImage(getAncho(), getAlto(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-
-        int widthIMG = img.getWidth(null);
-        int heightIMG = img.getHeight(null);
-        for (int i = 0; i < getAncho(); i += widthIMG / 10) {
-            for (int j = 0; j < getAlto(); j += heightIMG / 10) {
-                g2d.drawImage(img, i, j, widthIMG / 10, heightIMG / 10, null);
-            }
-        }
-        g2d.dispose();
-    }
-    
-    public void cargarImagen(){
-        File file = new File(getImagePath());
-        try {
-            img = ImageIO.read(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public Sprite(int x, int y, Contenedor contenedor, Runnable target) {
         super(target);
@@ -81,7 +61,35 @@ public abstract class Sprite
         this.contenedor = contenedor;
     }
     
+    public Sprite(int x, int y, Contenedor contenedor, int escalaTextura) {
+        this.x = x;
+        this.y = y;
+        this.contenedor = contenedor;
+        this.escalaTextura= escalaTextura;
+    }
     
+    public void crearTextura() {
+        image = new BufferedImage(getAncho(), getAlto(), BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+
+        int widthIMG = img.getWidth(null);
+        int heightIMG = img.getHeight(null);
+        for (int i = 0; i < getAncho(); i += widthIMG / escalaTextura) {
+            for (int j = 0; j < getAlto(); j += heightIMG / escalaTextura) {
+                g2d.drawImage(img, i, j, widthIMG / escalaTextura, heightIMG / escalaTextura, null);
+            }
+        }
+        g2d.dispose();
+    }
+    
+    public void cargarImagen(){
+        File file = new File(getImagePath());
+        try {
+            img = ImageIO.read(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public abstract void dibujar(Graphics g);
 
