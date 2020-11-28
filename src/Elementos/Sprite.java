@@ -13,6 +13,7 @@ import java.awt.Graphics;
  * @author hernando
  */
 public abstract class Sprite
+        extends Thread
         implements Contenedor {
 
     int x;
@@ -28,6 +29,27 @@ public abstract class Sprite
         this.setX(x);
         this.setY(y);
     }
+
+    public Sprite(int x, int y, Contenedor contenedor, Runnable target) {
+        super(target);
+        this.x = x;
+        this.y = y;
+        this.contenedor = contenedor;
+    }
+    
+    public Sprite(int x, int y, Runnable target) {
+        super(target);
+        this.x = x;
+        this.y = y;
+    }
+    
+    public Sprite(int x, int y, Contenedor contenedor) {
+        this.x = x;
+        this.y = y;
+        this.contenedor = contenedor;
+    }
+    
+    
 
     public abstract void dibujar(Graphics g);
 
@@ -60,7 +82,6 @@ public abstract class Sprite
             if ((x + ancho > x2 && (x + ancho < x2 + ancho / 2)) && !(x < x2 + ancho2 && (x > x2 + (ancho2 - ancho / 2)))) {
                 collicion[3] = 1;
             }
-            System.out.println("");
             for (int i = 0; i < 2; i++) {
                 if ((collicion[i] == COLLICION_YES) && collicion[2] == COLLICION_YES && collicion[3] == COLLICION_NOT) {
                     collicion[i] = COLLICION_NOT;

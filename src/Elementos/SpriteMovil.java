@@ -16,13 +16,12 @@ public abstract class SpriteMovil
         implements Runnable
 {
     private Ruta ruta;
-    protected Thread hilo;
-    public SpriteMovil(int x, int y) {
-        super(x, y);
+    public SpriteMovil(int x, int y,Runnable target) {
+        super(x, y, target);
     }
     
-    public SpriteMovil(int x, int y, Ruta ruta) {
-        super(x, y);
+    public SpriteMovil(int x, int y, Ruta ruta, Runnable target) {
+        super(x, y, target);
         this.setRuta(ruta);
     }
 
@@ -36,15 +35,5 @@ public abstract class SpriteMovil
     public Ruta getRuta() {
         return ruta;
     }
-
-    /**
-     * @param hilo the hilo to set
-     */
-    public void setHilo(Thread hilo) {
-        this.hilo = hilo;
-    }
-    
-    
-    
     
 }

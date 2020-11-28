@@ -16,12 +16,11 @@ import java.awt.event.KeyEvent;
 public class Player extends Sprite{
 
     int velocidad=10;
-    public Player(int x, int y) {
-        super(x, y);
+    public Player(int x, int y,Contenedor contenedor) {
+        super(x, y, contenedor);
         this.setColor(Color.GRAY);
         this.setAlto(30);
         this.setAncho(30);
-        
     }
 
     /**
@@ -38,11 +37,10 @@ public class Player extends Sprite{
         g.setColor(Color.PINK);
         g.fillRect(getX()-5, getY()-10, 40, 5);
         g.fillRect(getX()+10, getY()-10, 4, 30);
-        g.fillRect(getX()+17, getY()-10, 4, 30);
+        g.fillRect(getX()+16, getY()-10, 4, 30);
         g.fillRect(getX()+10, getY()-22, 10, 10);
         g.setColor(Color.GRAY);
         g.fillRect(getX()+10, getY()-10, getAncho()-20, getAlto()-10);
-        
     }
     
     public void moverse(java.awt.event.KeyEvent evt,int[] collicion){

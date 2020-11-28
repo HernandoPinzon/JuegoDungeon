@@ -79,10 +79,9 @@ public class VistaPrincipal extends javax.swing.JFrame
         vista.setLocationRelativeTo(null);
         vista.setSize(tamPantallaX,tamPantallaY);
         GameController gameController = new GameController(tamPantallaX,tamPantallaY);
-        gameController.setContenedor(vista);
-        gameController.prueba1Paredes();
-        gameController.prueba1EnemigoIndividual();
         vista.setGameController(gameController);
+        gameController.setContenedor(vista);
+        gameController.cargarEscenaPrueba();
         vista.setVisible(true);
     }
 

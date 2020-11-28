@@ -16,39 +16,25 @@ import java.util.logging.Logger;
  * @author hernando
  */
 public class Enemy extends SpriteMovil {
-
-    String name;
-
-    public Enemy(int x, int y) {
-        super(x, y);
+    public Enemy(int x, int y, Runnable target) {
+        super(x, y, target);
         setAncho(40);
         setAlto(40);
         setColor(Color.red);
-        iniciarHilo();
     }
 
-    public Enemy(int x, int y, Ruta ruta, String name) {
-        super(x, y, ruta);
+    public Enemy(int x, int y, Ruta ruta, String name, Runnable target) {
+        super(x, y, ruta, target);
         setAncho(40);
         setAlto(40);
         setColor(Color.red);
-        this.name = name;
-        iniciarHilo();
-    }
-
-    public void iniciarHilo() {
-        hilo = new Thread(this);
-        hilo.start();
+        this.setName(name);
     }
 
     @Override
     public void dibujar(Graphics g) {
         g.setColor(color);
         g.fillRect(getX(), getY(), getAncho(), getAlto());
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override

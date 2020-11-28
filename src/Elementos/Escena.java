@@ -23,14 +23,20 @@ public class Escena
 
     public Escena(int x, int y, int ancho, int alto, int playerX, int playerY) {
         super(x, y);
-        player = new Player(playerX, playerY);
+        player = new Player(playerX, playerY, this);
         paredes = new ArrayList();
         enemigos = new ArrayList();
         setAlto(alto);
         setAncho(ancho);
         setColor(Color.GREEN);
         player.setContenedor(this);
+    }
 
+    public void iniciarHilosEnemys(){
+        for (Enemy e : enemigos) {
+            e.start();
+            System.out.println(e.getName());
+        }
     }
 
     public void handleKeyPressed(java.awt.event.KeyEvent evt) {
@@ -42,7 +48,6 @@ public class Escena
             player.moverse(evt, inCollicionsPared(paredes));
         }
     }
-    
     public int[] inCollicionsPared(ArrayList<Pared> paredes){
         ArrayList<Sprite> sprites=new ArrayList<Sprite>();
         for (Pared pared : paredes) {
@@ -50,7 +55,6 @@ public class Escena
         }
         return inCollicions(sprites);
     }
-    
     public int[] inCollicionsEnemys(ArrayList<Enemy> enemigos){
         ArrayList<Sprite> sprites=new ArrayList<Sprite>();
         for (Enemy enemy : enemigos) {
@@ -58,7 +62,6 @@ public class Escena
         }
         return inCollicions(sprites);
     }
-
     public int[] inCollicions(ArrayList<Sprite> sprites) {
         ArrayList<int[]> collicions = new ArrayList<>();
         int[] resultado = {0, 0, 0, 0};
@@ -74,11 +77,12 @@ public class Escena
                 resultado[i] += collicion[i];
             }
         }
-
-        for (int i = 0; i < resultado.length; i++) {
+        
+        //Imprimir vector de coliciones
+        /*for (int i = 0; i < resultado.length; i++) {
             System.out.print(resultado[i]);
         }
-        System.out.println("");
+        System.out.println("");*/
         return resultado;
     }
 
@@ -102,7 +106,7 @@ public class Escena
     }
 
     public void agregarPared(int x, int y, int alto, int ancho) {
-        Pared paredNueva = new Pared(x, y, alto, ancho);
+        Pared paredNueva = new Pared(x, y, alto, ancho, this);
         paredNueva.setContenedor(this);
         paredes.add(paredNueva);
     }
@@ -113,16 +117,14 @@ public class Escena
     }
 
     public void agregarEnemy(int x, int y) {
-        Enemy newEnemy = new Enemy(x, y);
+        Enemy newEnemy = new Enemy(x, y, this);
         newEnemy.setContenedor(this);
-        System.out.println("se agrego enemigo");
         enemigos.add(newEnemy);
     }
 
     public void agregarEnemy(int x, int y, Ruta ruta, String name) {
-        Enemy newEnemy = new Enemy(x, y, ruta, name);
+        Enemy newEnemy = new Enemy(x, y, ruta, name, this);
         newEnemy.setContenedor(this);
-        System.out.println("se agrego enemigo");
         enemigos.add(newEnemy);
     }
 
