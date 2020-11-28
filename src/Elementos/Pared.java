@@ -20,15 +20,18 @@ public class Pared extends Sprite{
         this.setAlto(alto);
         this.setAncho(ancho);
         setImagePath("images/paredIMG.jpg");
-        
+        cargarImagen();
+        crearTextura();
+        System.out.println("alto: "+getAlto()+" ancho: "+getAncho());
+        System.out.println(image.getHeight()+" "+image.getWidth());
     }
-
     
-
     @Override
     public void dibujar(Graphics g) {
-        g.setColor(color);
-        g.fillRect(getX(), getY(), getAncho(), getAlto());
+        //g.setColor(color);
+        //g.fillRect(getX(), getY(), getAncho(), getAlto());
+        g.drawImage(image, x, y, null);
+        
         
     }
     

@@ -35,25 +35,9 @@ public class Escena
         player.setContenedor(this);
         setImagePath("images/piedra.jpg");
         cargarImagen();
-        crearImg();
+        crearTextura();
     }
-
-        public void crearImg(){
-        image = new BufferedImage(getAncho(), getAncho(), BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d = image.createGraphics();
-        
-        int widthIMG =img.getWidth(null);
-        int heightIMG = img.getHeight(null);
-        System.out.println(widthIMG+" "+heightIMG);
-        for (int i = 0; i < getAncho(); i+=widthIMG/10) {
-            for (int j = 0; j < getAlto(); j+=heightIMG/10) {
-                g2d.drawImage(img, i, j, widthIMG/10, heightIMG/10, null);
-                System.out.println(widthIMG+" "+heightIMG);
-            }
-        }
-        g2d.dispose();
-    }
-
+    
     public void iniciarHilosEnemys(){
         for (Enemy e : enemigos) {
             e.start();
@@ -112,7 +96,7 @@ public class Escena
     public void dibujar(Graphics g) {
         //g.setColor(color);
         //g.fillRect(getX(), getY(), getAncho(), getAlto());
-        g.drawImage(image, 0, 0, null);
+        g.drawImage(image, x, y, null);
         
         for (Pared p : paredes) {
             p.dibujar(g);
