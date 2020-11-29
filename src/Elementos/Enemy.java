@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 public class Enemy extends SpriteMovil {
     public Enemy(int x, int y, Runnable target) {
         super(x, y, target);
-        setAncho(40);
-        setAlto(40);
+        setAncho(50);
+        setAlto(50);
         setColor(Color.red);
     }
 
@@ -29,22 +29,23 @@ public class Enemy extends SpriteMovil {
         setAlto(40);
         setColor(Color.red);
         this.setName(name);
-        setImagePath("images/monster.png");
+        setImagePath("images/enemy3.png");
         cargarImagen();
     }
 
     @Override
     public void dibujar(Graphics g) {
-        //g.setColor(color);
-        //g.fillRect(getX(), getY(), getAncho(), getAlto());
-        g.drawImage(img, x, y-5, getAlto(), getAncho(), null);
+        g.setColor(color);
+        g.fillRect(getX(), getY(), getAncho(), getAlto());
+        g.drawImage(img, x-10, y-13, getAlto()+20, getAncho()+20, null);
     }
 
     @Override
     public void run() {
         ArrayList<int[]> arRuta = getRuta().getMovimientos();
         int speed = getRuta().speed;
-        while (true) {
+        boolean canMove= true;
+        while (canMove) {
             int a = 0;
             for (int[] r : arRuta) {
                 int dx = getX();
@@ -61,7 +62,8 @@ public class Enemy extends SpriteMovil {
                     try {
                         Thread.sleep(250);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
+                        Thread.currentThread().interrupt();
+                        canMove = false;
                     }
                     this.contenedor.refrescar();
                 }

@@ -22,8 +22,6 @@ public class Pared extends Sprite{
         setImagePath("images/paredIMG.jpg");
         cargarImagen();
         crearTextura();
-        System.out.println("alto: "+getAlto()+" ancho: "+getAncho());
-        System.out.println(image.getHeight()+" "+image.getWidth());
     }
     
     @Override

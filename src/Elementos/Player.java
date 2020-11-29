@@ -57,9 +57,6 @@ public class Player extends Sprite{
             x+=velocidad;
         }
         
-        
-        
-        if(getX()>800) System.exit(0);
         this.contenedor.refrescar();
     }
     

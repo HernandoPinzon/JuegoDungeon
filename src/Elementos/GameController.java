@@ -25,46 +25,41 @@ public class GameController implements Contenedor {
         this.setTamPantallaX(tamPX);
         this.setTamPantallaY(tamPY);
         escenas = new ArrayList<Escena>();
-        
     }
     
     public void cargarEscenaPrueba(){
         Escena escena1 = new Escena(0, 0, tamPantallaX, tamPantallaY, 30, 50);
         escena1.setContenedor(this);
         escenas.add(escena1);
-        prueba1Paredes();
-        prueba1EnemigosRuta();
-        iniciarEnemigos();
+        crearParedes1(escena1);
+        generarEnemigosPrueba(escena1);
+        escena1.iniciarHilosEnemys();
     }
     
-    public void iniciarEnemigos(){
-        escenas.get(escenaNum).iniciarHilosEnemys();
-    }
-
-    public void prueba1Paredes() {
-        escenas.get(escenaNum).agregarPared(0, 0, 400, 20);
-        escenas.get(escenaNum).agregarPared(20, 0, 40, 800);
-        escenas.get(escenaNum).agregarPared(780, 30, 320, 20);
-        escenas.get(escenaNum).agregarPared(20, 380, 20, 780);
-        escenas.get(escenaNum).agregarPared(70, 30, 300, 20);
-        escenas.get(escenaNum).agregarPared(90, 310, 20, 500);
-        escenas.get(escenaNum).agregarPared(650, 70, 310, 20);
-        escenas.get(escenaNum).agregarPared(590, 120, 210, 20);
-        escenas.get(escenaNum).agregarPared(130, 70, 20, 520);
+    public void crearParedes1(Escena escena) {
+        escena.agregarPared(0, 0, 400, 20);
+        escena.agregarPared(20, 0, 40, 800);
+        escena.agregarPared(780, 30, 320, 20);
+        escena.agregarPared(20, 380, 20, 780);
+        escena.agregarPared(70, 30, 300, 20);
+        escena.agregarPared(90, 310, 20, 500);
+        //escena.agregarPared(650, 70, 310, 20);
+        escena.agregarPared(590, 120, 210, 20);
+        escena.agregarPared(130, 70, 20, 520);
         contenedor.refrescar();
     }
 
-    public void prueba1EnemigosRuta() {
+    public void generarEnemigosPrueba(Escena escena) {
         Ruta ruta = new Ruta(10);
         ruta.addMovimiento(100, 100);
         ruta.addMovimiento(-100, -100);
-        escenas.get(escenaNum).agregarEnemy(300, 100, ruta, "prueba 1");
+        escena.agregarEnemy(300, 100, ruta, "prueba 1");
         Ruta ruta2 = new Ruta(20);
         ruta2.addMovimiento(400, 0);
         ruta2.addMovimiento(0, 200);
         ruta2.addMovimiento(0, -200);
         ruta2.addMovimiento(-400, 0);
-        escenas.get(escenaNum).agregarEnemy(150, 50, ruta2, "prueba 2");
+        escena.agregarEnemy(150, 50, ruta2, "prueba 2");
         contenedor.refrescar();
     }
 

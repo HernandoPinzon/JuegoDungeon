@@ -6,11 +6,15 @@
 package Elementos;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,6 +26,8 @@ public class Escena
     ArrayList<Pared> paredes;
     ArrayList<Enemy> enemigos;
     Player player;
+    boolean isLose;
+    Font fontYouLose;
     
 
     public Escena(int x, int y, int ancho, int alto, int playerX, int playerY) {
@@ -29,6 +35,7 @@ public class Escena
         player = new Player(playerX, playerY, this);
         paredes = new ArrayList();
         enemigos = new ArrayList();
+        isLose = false;
         setAlto(alto);
         setAncho(ancho);
         setColor(Color.GRAY);
@@ -36,12 +43,31 @@ public class Escena
         setImagePath("images/piedra.jpg");
         cargarImagen();
         crearTextura();
+        fontYouLose = new Font("Serif", Font.BOLD, 36);
+    }
+    
+    @Override
+    public void dibujar(Graphics g) {
+        g.drawImage(image, x, y, null);
+        if(isCollicionBool(inCollicionsEnemys(enemigos), true)|| isLose==true){
+            g.setFont(fontYouLose);
+            g.setColor(Color.RED);
+            g.drawString("YOU LOSE", getAncho()/2, getAlto()/2);
+            isLose= true;
+        }
+        
+        if(isLose){
+            pararHilosEnemys();
+        }
+        
+        for (Enemy e : enemigos) {
+            e.dibujar(g);
+        }
+        player.dibujar(g);
     }
     
     public void dibujarFondo(){
-        //image = new BufferedImage(getAncho(), getAlto(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = image.createGraphics();
-        
         for (Pared p : paredes) {
             g2d.drawImage(p.image, p.x, p.y, null);
         }
@@ -54,14 +80,19 @@ public class Escena
             System.out.println(e.getName());
         }
     }
+    
+    public void pararHilosEnemys(){
+        for (Enemy e : enemigos) {
+            e.interrupt();
+        }
+    }
 
     public void handleKeyPressed(java.awt.event.KeyEvent evt) {
-
         if (evt.getKeyCode() == KeyEvent.VK_UP
                 || evt.getKeyCode() == KeyEvent.VK_DOWN
                 || evt.getKeyCode() == KeyEvent.VK_LEFT
                 || evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-            player.moverse(evt, inCollicionsPared(paredes));
+            if(!isLose) player.moverse(evt, inCollicionsPared(paredes));
         }
     }
     public int[] inCollicionsPared(ArrayList<Pared> paredes){
@@ -93,33 +124,7 @@ public class Escena
                 resultado[i] += collicion[i];
             }
         }
-        
-        //Imprimir vector de coliciones
-        /*for (int i = 0; i < resultado.length; i++) {
-            System.out.print(resultado[i]);
-        }
-        System.out.println("");*/
         return resultado;
-    }
-
-    @Override
-    public void dibujar(Graphics g) {
-        //g.setColor(color);
-        //g.fillRect(getX(), getY(), getAncho(), getAlto());
-        g.drawImage(image, x, y, null);
-        
-        /*for (Pared p : paredes) {
-            p.dibujar(g);
-        }*/
-        
-        if(isCollicionBool(inCollicionsEnemys(enemigos), true)){
-            System.exit(0);
-        }
-        
-        for (Enemy e : enemigos) {
-            e.dibujar(g);
-        }
-        player.dibujar(g);
     }
 
     public void agregarPared(int x, int y, int alto, int ancho) {
@@ -149,10 +154,6 @@ public class Escena
     public void agregarEnemy(Enemy newEnemy) {
         newEnemy.setContenedor(this);
         enemigos.add(newEnemy);
-    }
-    
-    public void chocarEnemigo(){
-        
     }
 
 }
