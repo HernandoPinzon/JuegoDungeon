@@ -38,9 +38,8 @@ public abstract class Sprite
     public Sprite(int x, int y, int escalaTextura) {
         this.setX(x);
         this.setY(y);
-        this.escalaTextura= escalaTextura;
+        this.escalaTextura = escalaTextura;
     }
-    
 
     public Sprite(int x, int y, Contenedor contenedor, Runnable target) {
         super(target);
@@ -48,26 +47,26 @@ public abstract class Sprite
         this.y = y;
         this.contenedor = contenedor;
     }
-    
+
     public Sprite(int x, int y, Runnable target) {
         super(target);
         this.x = x;
         this.y = y;
     }
-    
+
     public Sprite(int x, int y, Contenedor contenedor) {
         this.x = x;
         this.y = y;
         this.contenedor = contenedor;
     }
-    
+
     public Sprite(int x, int y, Contenedor contenedor, int escalaTextura) {
         this.x = x;
         this.y = y;
         this.contenedor = contenedor;
-        this.escalaTextura= escalaTextura;
+        this.escalaTextura = escalaTextura;
     }
-    
+
     public void crearTextura() {
         image = new BufferedImage(getAncho(), getAlto(), BufferedImage.TYPE_INT_RGB);
         Graphics2D g2d = image.createGraphics();
@@ -81,14 +80,21 @@ public abstract class Sprite
         }
         g2d.dispose();
     }
-    
-    public void cargarImagen(){
+
+    public void cargarImagen() {
         File file = new File(getImagePath());
         try {
             img = ImageIO.read(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void crearImagenDesdeTileset(int posX, int posY, int posAncho, int posAlto) {
+        image = new BufferedImage(posAncho, posAlto, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = image.createGraphics();
+        g2d.drawImage(img, posX, posY, null);
+        g2d.dispose();
     }
 
     public abstract void dibujar(Graphics g);

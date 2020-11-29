@@ -10,11 +10,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.font.TextAttribute;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +21,7 @@ public class Escena
 
     ArrayList<Pared> paredes;
     ArrayList<Enemy> enemigos;
+    ArrayList<ObjetoInteractivo> objetos;
     Player player;
     boolean isLose;
     Font fontYouLose;
@@ -35,6 +32,7 @@ public class Escena
         player = new Player(playerX, playerY, this);
         paredes = new ArrayList();
         enemigos = new ArrayList();
+        objetos = new ArrayList();
         isLose = false;
         setAlto(alto);
         setAncho(ancho);
@@ -55,13 +53,16 @@ public class Escena
             g.drawString("YOU LOSE", getAncho()/2, getAlto()/2);
             isLose= true;
         }
-        
         if(isLose){
             pararHilosEnemys();
         }
         
         for (Enemy e : enemigos) {
             e.dibujar(g);
+        }
+        
+        for (ObjetoInteractivo obj : objetos) {
+            obj.dibujar(g);
         }
         player.dibujar(g);
     }
@@ -93,6 +94,10 @@ public class Escena
                 || evt.getKeyCode() == KeyEvent.VK_LEFT
                 || evt.getKeyCode() == KeyEvent.VK_RIGHT) {
             if(!isLose) player.moverse(evt, inCollicionsPared(paredes));
+        } else if (evt.getKeyCode() == KeyEvent.VK_E){
+            for (ObjetoInteractivo obj : objetos) {
+                obj.interactuar();
+            }
         }
     }
     public int[] inCollicionsPared(ArrayList<Pared> paredes){
@@ -129,8 +134,19 @@ public class Escena
 
     public void agregarPared(int x, int y, int alto, int ancho) {
         Pared paredNueva = new Pared(x, y, alto, ancho, this);
-        paredNueva.setContenedor(this);
         paredes.add(paredNueva);
+        dibujarFondo();
+    }
+    
+    public void agregarLlave(int x, int y, int ancho, int alto) {
+        Llave llaveNueva = new Llave(x, y, ancho, alto, this);
+        objetos.add(llaveNueva);
+        dibujarFondo();
+    }
+    
+    public void agregarPuerta(int x, int y, int ancho, int alto) {
+        Puerta puertaNueva = new Puerta(x, y, ancho, alto, this);
+        objetos.add(puertaNueva);
         dibujarFondo();
     }
 

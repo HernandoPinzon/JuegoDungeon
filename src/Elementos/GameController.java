@@ -33,13 +33,15 @@ public class GameController implements Contenedor {
         escenas.add(escena1);
         crearParedes1(escena1);
         generarEnemigosPrueba(escena1);
+        escena1.agregarLlave(300, 200,45,45);
+        escena1.agregarPuerta(750, 330,50,50);
         escena1.iniciarHilosEnemys();
     }
     
     public void crearParedes1(Escena escena) {
         escena.agregarPared(0, 0, 400, 20);
         escena.agregarPared(20, 0, 40, 800);
-        escena.agregarPared(780, 30, 320, 20);
+        escena.agregarPared(750, 30, 300, 50);
         escena.agregarPared(20, 380, 20, 780);
         escena.agregarPared(70, 30, 300, 20);
         escena.agregarPared(90, 310, 20, 500);

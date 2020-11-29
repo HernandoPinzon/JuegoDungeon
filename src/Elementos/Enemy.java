@@ -35,8 +35,8 @@ public class Enemy extends SpriteMovil {
 
     @Override
     public void dibujar(Graphics g) {
-        g.setColor(color);
-        g.fillRect(getX(), getY(), getAncho(), getAlto());
+        //g.setColor(color);
+        //g.fillRect(getX(), getY(), getAncho(), getAlto());
         g.drawImage(img, x-10, y-13, getAlto()+20, getAncho()+20, null);
     }
 
