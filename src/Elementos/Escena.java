@@ -5,6 +5,7 @@
  */
 package Elementos;
 
+import exepcions.finDeEscenaExepcion;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -88,16 +89,19 @@ public class Escena
         }
     }
 
-    public void handleKeyPressed(java.awt.event.KeyEvent evt) {
+    public void handleKeyPressed(java.awt.event.KeyEvent evt) throws finDeEscenaExepcion {
         if (evt.getKeyCode() == KeyEvent.VK_UP
                 || evt.getKeyCode() == KeyEvent.VK_DOWN
                 || evt.getKeyCode() == KeyEvent.VK_LEFT
                 || evt.getKeyCode() == KeyEvent.VK_RIGHT) {
             if(!isLose) player.moverse(evt, inCollicionsPared(paredes));
-        } else if (evt.getKeyCode() == KeyEvent.VK_E){
+        } else if (evt.getKeyCode() == KeyEvent.VK_E&&player.x>750){
             for (ObjetoInteractivo obj : objetos) {
                 obj.interactuar();
             }
+            finDeEscenaExepcion e = new finDeEscenaExepcion();
+            throw e;
+            //System.exit(0);
         }
     }
     public int[] inCollicionsPared(ArrayList<Pared> paredes){

@@ -102,6 +102,7 @@ public abstract class Sprite
     public boolean isCollicionBool(int[] collicion, boolean bool) {
         if (bool) {
             if (collicion[0] != 0 || collicion[1] != 0 || collicion[2] != 0 || collicion[3] != 0) {
+                System.out.println("in coliccion");
                 return true;
             }
         }

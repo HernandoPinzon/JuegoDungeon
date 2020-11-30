@@ -56,7 +56,6 @@ public class Player extends Sprite{
         } else if (evt.getKeyCode()== KeyEvent.VK_RIGHT&&(collicion[3]==Sprite.COLLICION_NOT)){
             x+=velocidad;
         }
-        
         this.contenedor.refrescar();
     }
     
